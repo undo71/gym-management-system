@@ -1,0 +1,1217 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Spor Salonu</title>
+  <meta name="description" content="Modern, animasyonlu spor salonu sitesi: program, beslenme, diyet, üyelik ve kayıt ol." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#070A12;
+      --panel: rgba(255,255,255,.06);
+      --panel2: rgba(255,255,255,.09);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.68);
+      --brand1:#7C3AED;
+      --brand2:#22C55E;
+      --brand3:#06B6D4;
+      --danger:#FB7185;
+      --shadow: 0 20px 70px rgba(0,0,0,.5);
+      --radius: 18px;
+      --radius2: 26px;
+      --ring: 0 0 0 3px rgba(124,58,237,.35);
+      --max: 1120px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 700px at 20% -10%, rgba(124,58,237,.40), transparent 55%),
+                  radial-gradient(900px 650px at 85% 0%, rgba(6,182,212,.35), transparent 52%),
+                  radial-gradient(900px 650px at 70% 85%, rgba(34,197,94,.25), transparent 58%),
+                  linear-gradient(180deg, var(--bg), #050712 70%, #040611);
+      color:var(--text);
+      overflow-x:hidden;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    button, input, select, textarea{ font:inherit; }
+
+    /* Top nav */
+    .nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(12px);
+      background: rgba(7,10,18,.55);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .nav-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding: 14px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      font-weight:700; letter-spacing:.2px;
+    }
+    .logo{
+      width:38px; height:38px; border-radius:14px;
+      background: linear-gradient(135deg, rgba(124,58,237,.95), rgba(6,182,212,.9));
+      box-shadow: 0 14px 40px rgba(124,58,237,.25);
+      position:relative;
+      overflow:hidden;
+    }
+    .logo:before{
+      content:"";
+      position:absolute; inset:-40px;
+      background: conic-gradient(from 120deg, rgba(34,197,94,.9), rgba(124,58,237,.95), rgba(6,182,212,.9));
+      animation: spin 6s linear infinite;
+      opacity:.9;
+    }
+    .logo:after{
+      content:"";
+      position:absolute; inset:2px;
+      border-radius:12px;
+      background: rgba(7,10,18,.7);
+    }
+    @keyframes spin{ to{ transform: rotate(360deg);} }
+
+    .menu{
+      display:flex; gap:16px; align-items:center;
+    }
+    .menu a{
+      padding:10px 10px; border-radius:12px;
+      color:var(--muted);
+      font-weight:600;
+      transition: transform .15s ease, background .15s ease, color .15s ease;
+    }
+    .menu a:hover{
+      color:var(--text);
+      background: rgba(255,255,255,.06);
+      transform: translateY(-1px);
+    }
+
+    .nav-cta{ display:flex; gap:10px; align-items:center; }
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding: 11px 14px; border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      color:var(--text);
+      font-weight:700;
+      gap:10px;
+      transition: transform .16s ease, background .16s ease, border-color .16s ease;
+      cursor:pointer;
+      user-select:none;
+    }
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.18); }
+    .btn:active{ transform: translateY(0px); }
+    .btn-primary{
+      border: 1px solid rgba(124,58,237,.35);
+      background: linear-gradient(135deg, rgba(124,58,237,.88), rgba(6,182,212,.45));
+      box-shadow: 0 18px 50px rgba(124,58,237,.22);
+    }
+    .btn-primary:hover{ background: linear-gradient(135deg, rgba(124,58,237,.98), rgba(6,182,212,.55)); }
+
+    /* Layout */
+    .container{ max-width:var(--max); margin:0 auto; padding: 0 18px; }
+
+    .hero{ position:relative; padding: 66px 0 26px; }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 22px;
+      align-items:start;
+    }
+
+    .kicker{
+      display:inline-flex; gap:10px; align-items:center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      color: var(--muted);
+      font-weight:600;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, #fff, rgba(255,255,255,.2) 35%),
+                  linear-gradient(135deg, var(--brand2), var(--brand3));
+      box-shadow: 0 0 0 4px rgba(34,197,94,.14);
+    }
+
+    .h1{
+      margin: 16px 0 10px;
+      font-size: clamp(34px, 4.2vw, 56px);
+      line-height: 1.02;
+      letter-spacing: -0.8px;
+      font-weight: 800;
+    }
+    .grad-text{
+      background: linear-gradient(90deg, rgba(124,58,237,1), rgba(6,182,212,1), rgba(34,197,94,1));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+    .sub{
+      color:var(--muted);
+      font-size: 16.5px;
+      line-height: 1.6;
+      margin: 0 0 18px;
+      max-width: 56ch;
+    }
+
+    .hero-actions{ display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
+
+    .mini-cards{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .card-mini{
+      padding: 14px;
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: 0 18px 60px rgba(0,0,0,.25);
+      position:relative;
+      overflow:hidden;
+    }
+    .card-mini:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(500px 120px at 20% 0%, rgba(124,58,237,.25), transparent 60%),
+                  radial-gradient(500px 120px at 90% 10%, rgba(6,182,212,.18), transparent 60%);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .card-mini > *{ position:relative; }
+
+    .card-title{ font-weight:800; margin: 0 0 6px; }
+    .card-desc{ margin:0; color:var(--muted); font-weight:600; font-size: 13.5px; line-height:1.5; }
+
+    /* Right hero panel */
+    .hero-panel{
+      border-radius: var(--radius2);
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+      min-height: 360px;
+    }
+    .hero-panel:before{
+      content:"";
+      position:absolute; inset:-80px;
+      background:
+        radial-gradient(420px 220px at 30% 20%, rgba(124,58,237,.38), transparent 60%),
+        radial-gradient(420px 220px at 70% 10%, rgba(6,182,212,.30), transparent 62%),
+        radial-gradient(420px 220px at 60% 90%, rgba(34,197,94,.24), transparent 60%);
+      filter:saturate(1.2);
+      animation: floaty 6.8s ease-in-out infinite;
+      opacity:.9;
+    }
+    @keyframes floaty{
+      0%,100%{ transform: translateY(0px) translateX(0px) scale(1); }
+      50%{ transform: translateY(-10px) translateX(6px) scale(1.02); }
+    }
+
+    .panel-content{
+      position:relative;
+      padding: 18px;
+      display:flex;
+      flex-direction:column;
+      gap: 14px;
+      height:100%;
+    }
+
+    .stat-row{ display:flex; gap:12px; }
+    .stat{
+      flex:1;
+      padding: 14px;
+      border-radius: 16px;
+      background: rgba(0,0,0,.15);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    .stat b{ display:block; font-size: 18px; }
+    .stat span{ color: var(--muted); font-weight:700; font-size: 12.5px; }
+
+    .trainer-widget{
+      margin-top:auto;
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+    }
+    .trainer-widget h3{ margin:0 0 8px; font-size: 15px; }
+    .trainer-widget p{ margin:0 0 12px; color: var(--muted); font-weight:650; line-height:1.5; font-size: 13.5px; }
+
+    .pill-row{ display:flex; gap:8px; flex-wrap:wrap; }
+    .pill{
+      padding:8px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      color: var(--muted);
+      font-weight:800;
+      font-size: 12.5px;
+    }
+
+    /* Sections */
+    section{ padding: 40px 0; }
+    .section-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:14px;
+      margin-bottom: 18px;
+    }
+    .section-head h2{
+      margin:0;
+      font-size: 24px;
+      letter-spacing:-.3px;
+    }
+    .section-head p{ margin:0; color: var(--muted); font-weight:650; line-height:1.5; max-width: 60ch; }
+
+    .grid-3{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .grid-2{ display:grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+
+    .panel{
+      border-radius: var(--radius2);
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: 0 18px 60px rgba(0,0,0,.22);
+      overflow:hidden;
+    }
+
+    .feature{ padding: 18px; position:relative; }
+    .feature:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(420px 120px at 15% 0%, rgba(124,58,237,.20), transparent 60%),
+                  radial-gradient(420px 120px at 90% 10%, rgba(6,182,212,.16), transparent 60%);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .feature > *{ position:relative; }
+
+    .icon{
+      width: 44px; height:44px;
+      border-radius: 16px;
+      display:flex; align-items:center; justify-content:center;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      margin-bottom: 12px;
+    }
+
+    .feature h3{ margin: 0 0 8px; font-size: 16px; }
+    .feature p{ margin:0; color:var(--muted); font-weight:650; line-height:1.6; font-size: 13.5px; }
+
+    /* Reveal animations */
+    .reveal{ opacity:0; transform: translateY(16px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.in{ opacity:1; transform: translateY(0); }
+
+    /* Program table */
+    .table-wrap{ padding: 14px; }
+    table{ width:100%; border-collapse: collapse; }
+    th, td{ padding: 12px 10px; text-align:left; border-bottom: 1px solid rgba(255,255,255,.08); }
+    th{ color: rgba(255,255,255,.82); font-size: 13px; letter-spacing:.2px; }
+    td{ color: var(--muted); font-weight:650; font-size: 13.5px; }
+    tr:hover td{ color: rgba(255,255,255,.82); }
+
+    /* Forms */
+    .form{ padding: 18px; }
+    .form-row{ display:grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .field{ display:flex; flex-direction:column; gap:8px; margin-bottom: 12px; }
+    label{ color: rgba(255,255,255,.82); font-weight:800; font-size: 13px; }
+    input, select{
+      padding: 12px 12px;
+      border-radius: 14px;
+      background: rgba(0,0,0,.18);
+      border: 1px solid rgba(255,255,255,.12);
+      color: var(--text);
+      outline:none;
+    }
+    input:focus, select:focus{ box-shadow: var(--ring); border-color: rgba(124,58,237,.42); }
+    .help{ color: var(--muted); font-weight:650; font-size: 12.5px; line-height:1.4; margin-top:-6px; }
+
+    .error{ color: var(--danger); font-weight:800; font-size: 12.5px; margin-top:-4px; }
+    .success{ color: rgba(34,197,94,.95); font-weight:900; font-size: 13px; margin-top: 10px; }
+
+    .diary-grid{ display:grid; grid-template-columns: repeat(7, 1fr); gap: 10px; }
+    .day-card{
+      border-radius: 18px;
+      background: rgba(0,0,0,.14);
+      border:1px solid rgba(255,255,255,.10);
+      padding: 12px;
+      min-height: 210px;
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+    }
+    .day-card b{ font-size: 13.5px; }
+    .meal{
+      padding: 8px 10px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+      font-weight:700;
+      font-size: 12.5px;
+      line-height:1.35;
+    }
+
+    .macro-list{ display:grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .macro-item{
+      border-radius: 18px;
+      background: rgba(0,0,0,.14);
+      border:1px solid rgba(255,255,255,.10);
+      padding: 14px;
+    }
+    .macro-item b{ display:block; margin-bottom: 6px; }
+
+    @media (max-width: 920px){
+      .hero-grid{ grid-template-columns: 1fr; }
+      .mini-cards{ grid-template-columns: 1fr 1fr; }
+      .grid-3{ grid-template-columns: 1fr; }
+      .grid-2{ grid-template-columns: 1fr; }
+      .menu{ display:none; }
+      .diary-grid{ grid-template-columns: 1fr; }
+      .macro-list{ grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav" role="banner">
+    <div class="nav-inner">
+      <a class="brand" href="#home" aria-label="Ana sayfa">
+        <span class="logo" aria-hidden="true"></span>
+        <span>SporSalonu</span>
+      </a>
+
+      <nav class="menu" aria-label="Ana menü">
+        <a href="#program">Haftalık Program</a>
+        <a href="#beslenme">Beslenme</a>
+        <a href="#diyet">Diyet Programı</a>
+        <a href="#vucut">Vücut Tipi</a>
+        <a href="#egitmenler">Eğitmenler</a>
+        <a href="#kayit">Kayıt</a>
+      </nav>
+
+      <div class="nav-cta">
+        <a class="btn" href="#kayit">Üye Girişi</a>
+        <a class="btn btn-primary" href="#kayit">Kayıt Ol</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="home" class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="reveal">
+          <div class="kicker"><span class="dot"></span> Kişiye özel antrenman • Plan • Beslenme</div>
+          <h1 class="h1">Modern <span class="grad-text">performans</span> için hedefe göre program</h1>
+          <p class="sub">
+            Vücut tipine göre öneriler, hangi gün ne çalışacağın ve güçlendirme planı burada.
+            Ayrıca animasyonlu üyelik/kayıt akışı ile kolayca başla.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#program">Programı Gör</a>
+            <a class="btn" href="#vucut">Vücut Tipi Seç</a>
+          </div>
+
+          <div class="mini-cards">
+            <div class="card-mini">
+              <p class="card-title">Scroll Animasyon</p>
+              <p class="card-desc">Reveal efektleri ile bölümler canlı görünür.</p>
+            </div>
+            <div class="card-mini">
+              <p class="card-title">Akıllı Beslenme</p>
+              <p class="card-desc">Ectomorph/mesomorph/endormorph önerileri.</p>
+            </div>
+            <div class="card-mini">
+              <p class="card-title">Güçlendirme</p>
+              <p class="card-desc">Core, mobilite ve kondisyon blokları.</p>
+            </div>
+            <div class="card-mini">
+              <p class="card-title">Üyelik Demo</p>
+              <p class="card-desc">Form doğrulama + localStorage kaydı.</p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="hero-panel reveal" aria-label="Özet panel">
+          <div class="panel-content">
+            <div class="stat-row">
+              <div class="stat">
+                <b>4-5</b>
+                <span>Gün Antrenman</span>
+              </div>
+              <div class="stat">
+                <b>8</b>
+                <span>Haftalık Blok</span>
+              </div>
+            </div>
+
+            <div class="stat-row">
+              <div class="stat">
+                <b>3</b>
+                <span>Temel Modül</span>
+              </div>
+              <div class="stat">
+                <b>+Core</b>
+                <span>Güçlendirme</span>
+              </div>
+            </div>
+
+            <div class="trainer-widget">
+              <h3>Hızlı Başlangıç</h3>
+              <p>
+                1) Vücut tipini seç • 2) Hedefi seç • 3) Haftalık programı uygula.
+                Sonra diyet planını ekle.
+              </p>
+              <div class="pill-row">
+                <span class="pill">Isınma</span>
+                <span class="pill">Ana set</span>
+                <span class="pill">Finisher</span>
+                <span class="pill">Esneme</span>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <section id="program">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <h2>Haftalık Program (Öneri)</h2>
+          <p>
+            Günler; kuvvet + hipertrofi + kondisyon + mobilite dengesine göre kurgulandı.
+            Aşağıdaki plan 8 haftalık döngüye uygundur (hafta içi yük artırımı ile).
+          </p>
+        </div>
+      </div>
+
+      <div class="panel reveal">
+        <div class="table-wrap">
+          <table aria-label="Haftalık program tablosu">
+            <thead>
+              <tr>
+                <th>Gün</th>
+                <th>Odak</th>
+                <th>Örnek İçerik</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>Pazartesi</b></td>
+                <td>Kuvvet • Üst Vücut</td>
+                <td>
+                  Bench/şınav varyasyon • Row • Omuz pres • Core (plank + dead bug)
+                </td>
+              </tr>
+              <tr>
+                <td><b>Salı</b></td>
+                <td>Kondisyon • Mobilite</td>
+                <td>
+                  20-30 dk interval (bisiklet/koşu) • Kalça mobilite • Thoracic rotasyon
+                </td>
+              </tr>
+              <tr>
+                <td><b>Çarşamba</b></td>
+                <td>Alt Vücut • Hipertrofi</td>
+                <td>
+                  Squat/leg press • RDL • Hamstring curl • Calf • Core (side plank)
+                </td>
+              </tr>
+              <tr>
+                <td><b>Perşembe</b></td>
+                <td>Aktif toparlanma</td>
+                <td>
+                  Yürüyüş 30-45 dk • Hafif band çalışması • Esneme (hamstring/kalça)
+                </td>
+              </tr>
+              <tr>
+                <td><b>Cuma</b></td>
+                <td>Kuvvet • Sırt + Kollar</td>
+                <td>
+                  Lat pulldown/pull-up • Overhead row • Biceps curl • Triceps pushdown
+                </td>
+              </tr>
+              <tr>
+                <td><b>Cumartesi</b></td>
+                <td>Finisher + Core</td>
+                <td>
+                  EMOM/Tabata tarzı (15-20 dk) • Ab wheel / hanging leg raise • Stretch
+                </td>
+              </tr>
+              <tr>
+                <td><b>Pazar</b></td>
+                <td>Dinlenme</td>
+                <td>
+                  Tam dinlenme veya çok hafif yürüyüş • Uyku odaklı toparlanma
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="help" style="margin:12px 0 0;">
+            Not: Yeni başlayan için hacmi %60-70’e düşür. Ağrı (eklem/sert ağrı) olursa hareketi durdur.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="beslenme">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <h2>Beslenme: Ne yemeli? (Genel)</h2>
+          <p>
+            Hedefe göre makro dağılımı değişir. Aşağıdaki öneriler vücut tipine göre de özelleştirilir.
+            (Bu içerik genel bilgilendirmedir; sağlık durumun varsa uzmana danış.)
+          </p>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="panel feature reveal">
+          <div class="icon" aria-hidden="true">🥚</div>
+          <h3>Protein</h3>
+          <p>
+            Her öğüne protein ekle: yumurta, tavuk, hindi, yoğurt/kefir, balık, baklagil.
+            Hedefe göre günde yaklaşık 1.6–2.2 g/kg aralığı (genel öneri).
+          </p>
+        </div>
+        <div class="panel feature reveal">
+          <div class="icon" aria-hidden="true">🥗</div>
+          <h3>Karbonhidrat</h3>
+          <p>
+            Antrenman çevresinde güç verir: pirinç, patates, yulaf, makarna, tam tahıl ekmek.
+            Hedef (yağ verme) varsa porsiyonları kontrollü yap.
+          </p>
+        </div>
+        <div class="panel feature reveal">
+          <div class="icon" aria-hidden="true">🥑</div>
+          <h3>Yağ + Lif</h3>
+          <p>
+            Avokado, zeytinyağı, kuruyemişler; lif için sebze, meyve, salata.
+            Sindirim ve toparlanma için günlük dengeyi koru.
+          </p>
+        </div>
+      </div>
+
+      <div class="panel reveal" style="margin-top:14px;">
+        <div class="form" style="padding-bottom:22px;">
+          <h3 style="margin:0 0 10px;">Hızlı örnek gün (hedefe göre uyarlanır)</h3>
+          <div class="grid-2">
+            <div class="panel" style="background: rgba(0,0,0,.14); border-radius: 18px; border:1px solid rgba(255,255,255,.10);">
+              <div class="form" style="padding:16px;">
+                <b>Kahvaltı</b>
+                <p class="help" style="margin-top:6px;">
+                  Yumurta + yulaf/ekmek + yoğurt • 1 porsiyon meyve
+                </p>
+              </div>
+            </div>
+            <div class="panel" style="background: rgba(0,0,0,.14); border-radius: 18px; border:1px solid rgba(255,255,255,.10);">
+              <div class="form" style="padding:16px;">
+                <b>Öğle/Akşam</b>
+                <p class="help" style="margin-top:6px;">
+                  Tavuk/balık + pirinç/patates + bol salata • Zeytinyağı
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="help" style="margin-top:12px;">
+            Antrenman sonrası: protein + hızlı sindirilen karbonhidrat eklemek toparlanmayı hızlandırabilir.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="diyet">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <h2>Diyet Programı (Kişiye Özel)</h2>
+          <p>
+            Kayıt olduktan sonra vücut tipi + hedef kombinasyonuna göre 7 günlük öğün kartları ve haftalık makro hedef/örnek porsiyonlar burada güncellenir.
+          </p>
+        </div>
+      </div>
+
+      <div class="panel reveal">
+        <div class="form" style="padding: 18px;">
+          <div id="dietStatus" class="help" style="margin-bottom: 12px;">Kişiye özel diyet için önce kayıt yap.</div>
+
+          <div id="dietMeals" style="display:none;">
+            <div class="help" style="margin:0 0 12px; font-weight:850; color: rgba(255,255,255,.78);">7 Günlük Öğün Planı</div>
+            <div class="diary-grid" aria-label="7 Günlük Diyet Planı">
+              <div class="day-card"><b>Pazartesi</b><div class="meal" data-meal-day="Pzt" data-meal-slot="k"></div><div class="meal" data-meal-day="Pzt" data-meal-slot="o"></div><div class="meal" data-meal-day="Pzt" data-meal-slot="a"></div><div class="meal" data-meal-day="Pzt" data-meal-slot="ara"></div></div>
+              <div class="day-card"><b>Salı</b><div class="meal" data-meal-day="Sal" data-meal-slot="k"></div><div class="meal" data-meal-day="Sal" data-meal-slot="o"></div><div class="meal" data-meal-day="Sal" data-meal-slot="a"></div><div class="meal" data-meal-day="Sal" data-meal-slot="ara"></div></div>
+              <div class="day-card"><b>Çarşamba</b><div class="meal" data-meal-day="Crs" data-meal-slot="k"></div><div class="meal" data-meal-day="Crs" data-meal-slot="o"></div><div class="meal" data-meal-day="Crs" data-meal-slot="a"></div><div class="meal" data-meal-day="Crs" data-meal-slot="ara"></div></div>
+              <div class="day-card"><b>Perşembe</b><div class="meal" data-meal-day="Prs" data-meal-slot="k"></div><div class="meal" data-meal-day="Prs" data-meal-slot="o"></div><div class="meal" data-meal-day="Prs" data-meal-slot="a"></div><div class="meal" data-meal-day="Prs" data-meal-slot="ara"></div></div>
+              <div class="day-card"><b>Cuma</b><div class="meal" data-meal-day="Cum" data-meal-slot="k"></div><div class="meal" data-meal-day="Cum" data-meal-slot="o"></div><div class="meal" data-meal-day="Cum" data-meal-slot="a"></div><div class="meal" data-meal-day="Cum" data-meal-slot="ara"></div></div>
+              <div class="day-card"><b>Cumartesi</b><div class="meal" data-meal-day="Cts" data-meal-slot="k"></div><div class="meal" data-meal-day="Cts" data-meal-slot="o"></div><div class="meal" data-meal-day="Cts" data-meal-slot="a"></div><div class="meal" data-meal-day="Cts" data-meal-slot="ara"></div></div>
+              <div class="day-card"><b>Pazar</b><div class="meal" data-meal-day="Paz" data-meal-slot="k"></div><div class="meal" data-meal-day="Paz" data-meal-slot="o"></div><div class="meal" data-meal-day="Paz" data-meal-slot="a"></div><div class="meal" data-meal-day="Paz" data-meal-slot="ara"></div></div>
+            </div>
+          </div>
+
+          <div id="dietMacros" style="display:none; margin-top: 16px;">
+            <div class="help" style="margin:0 0 12px; font-weight:850; color: rgba(255,255,255,.78);">Haftalık Makro Hedef + Örnek Porsiyonlar</div>
+            <div class="macro-list">
+              <div class="macro-item"><b>Makro Yaklaşımı</b><div id="macroApprox" class="help" style="margin-top:0; font-size: 13px;">-</div></div>
+              <div class="macro-item"><b>Öğün Dağılımı</b><div id="macroMeals" class="help" style="margin-top:0; font-size: 13px;">-</div></div>
+              <div class="macro-item"><b>Örnek Porsiyonlar</b><div id="macroPortion" class="help" style="margin-top:0; font-size: 13px;">-</div></div>
+              <div class="macro-item"><b>Hedefe Özel Not</b><div id="macroGoalNote" class="help" style="margin-top:0; font-size: 13px;">-</div></div>
+            </div>
+            <div class="help" style="margin-top:12px;">
+              Not: Bu içerik genel rehberdir. Kişisel hastalık/ilaç/alerji durumlarında uzman görüşü şarttır.
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="vucut">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <h2>Vücut Tipine Göre Öneri</h2>
+          <p>
+            Ectomorph (zayıf/ince) • Mesomorph (kaslı) • Endomorph (daha dolgun) için farklı antrenman ve beslenme ipuçları.
+            Aşağıdan seç, önerileri sağ tarafta anlık güncelle.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="panel reveal">
+          <div class="form">
+            <h3 style="margin:0 0 10px;">1) Vücut Tipi Seç</h3>
+            <div class="field">
+              <label for="bodyType">Vücut tipi</label>
+              <select id="bodyType">
+                <option value="">Seç...</option>
+                <option value="ecto">Ectomorph</option>
+                <option value="meso">Mesomorph</option>
+                <option value="endo">Endomorph</option>
+              </select>
+              <div class="help">Öneriler geneldir; kişisel durumunuza göre ayarlanmalıdır.</div>
+            </div>
+
+            <div class="field" style="margin-bottom:0;">
+              <label for="goal">Hedef</label>
+              <select id="goal">
+                <option value="">Seç...</option>
+                <option value="bulk">Kilo almak / kas artırmak</option>
+                <option value="cut">Yağ azaltmak</option>
+                <option value="tone">Sıkılaşma / kondisyon</option>
+              </select>
+            </div>
+
+            <div class="help" style="margin-top:12px;">
+              İpucu: Doğru hedefi seçince öneriler daha “uyumlu” görünür.
+            </div>
+          </div>
+        </div>
+
+        <div class="panel reveal" aria-live="polite">
+          <div class="form" style="padding:18px;">
+            <h3 style="margin:0 0 10px;">Öneriler</h3>
+            <div id="recommendation" style="color:var(--muted); font-weight:650; line-height:1.7;">
+              Vücut tipinizi ve hedefinizi seçtiğinizde burada kişiye özel öneriler görünecek.
+            </div>
+
+            <div class="panel" style="margin-top:14px; padding:14px; background: rgba(0,0,0,.14); border:1px solid rgba(255,255,255,.10); border-radius: 18px;">
+              <b>Güçlendirme (Core + Mobilite)</b>
+              <p class="help" style="margin-top:6px;">
+                Haftada 3 gün: plank varyasyon • dead bug • hanging leg raise (seviyene göre) + kalça/omuz mobilitesi.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="egitmenler">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <h2>Eğitmenler</h2>
+          <p>
+            Bu bölüm tasarım amaçlı örnek içerik içerir.
+            İstersen gerçek eğitmen isimleri/rozetler ekleyebilirim.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="panel feature reveal">
+          <div class="icon" aria-hidden="true">💪</div>
+          <h3>Baran • Kuvvet</h3>
+          <p>Kuvvet antrenmanı, teknik düzeltme ve progresif overload planlar.</p>
+        </div>
+        <div class="panel feature reveal">
+          <div class="icon" aria-hidden="true">⚡</div>
+          <h3>Elif • Kondisyon</h3>
+          <p>Interval/finisher çalışmaları, kalp-damar kondisyonu ve toparlanma.</p>
+        </div>
+        <div class="panel feature reveal">
+          <div class="icon" aria-hidden="true">🧠</div>
+          <h3>Can • Beslenme</h3>
+          <p>Protein/karbonhidrat dengesi, öğün planı ve alışkanlık takibi.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="kayit">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <h2>Üyelik / Kayıt Ol</h2>
+          <p>
+            Bu form demo amaçlıdır: veriler tarayıcıda localStorage’a kaydedilir.
+            Modern UI + basit doğrulama içerir.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="panel reveal">
+          <form class="form" id="signupForm" novalidate>
+            <h3 style="margin:0 0 10px;">Kayıt Formu</h3>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="name">Ad Soyad</label>
+                <input id="name" name="name" autocomplete="name" placeholder="Örn: Ayşe Yılmaz" />
+                <div class="error" data-err-for="name"></div>
+              </div>
+              <div class="field">
+                <label for="email">E-posta</label>
+                <input id="email" name="email" type="email" autocomplete="email" placeholder="ornek@mail.com" />
+                <div class="error" data-err-for="email"></div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="phone">Telefon</label>
+                <input id="phone" name="phone" inputmode="tel" placeholder="05xx xxx xx xx" />
+                <div class="error" data-err-for="phone"></div>
+              </div>
+              <div class="field">
+                <label for="age">Yaş</label>
+                <input id="age" name="age" type="number" min="14" max="90" placeholder="18" />
+                <div class="error" data-err-for="age"></div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="bodyType2">Vücut Tipi</label>
+                <select id="bodyType2" name="bodyType2">
+                  <option value="">Seç...</option>
+                  <option value="ecto">Ectomorph</option>
+                  <option value="meso">Mesomorph</option>
+                  <option value="endo">Endomorph</option>
+                </select>
+                <div class="error" data-err-for="bodyType2"></div>
+              </div>
+              <div class="field">
+                <label for="goal2">Hedef</label>
+                <select id="goal2" name="goal2">
+                  <option value="">Seç...</option>
+                  <option value="bulk">Kas artırmak</option>
+                  <option value="cut">Yağ azaltmak</option>
+                  <option value="tone">Sıkılaşma</option>
+                </select>
+                <div class="error" data-err-for="goal2"></div>
+              </div>
+            </div>
+
+            <div class="field" style="margin-bottom:6px;">
+              <label for="consent">Onay</label>
+              <select id="consent" name="consent">
+                <option value="">Seç...</option>
+                <option value="yes">Kayıt bilgilerini saklamaya izin veriyorum</option>
+              </select>
+              <div class="error" data-err-for="consent"></div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width:100%; padding:12px 14px;">
+              Kayıt Ol
+              <span aria-hidden="true">✨</span>
+            </button>
+            <div id="signupStatus" class="success" style="display:none;">Kayıt alındı. Üye paneli aşağıda görünecek.</div>
+          </form>
+        </div>
+
+        <div class="panel reveal">
+          <div class="form">
+            <h3 style="margin:0 0 10px;">Üye Paneli (Demo)</h3>
+            <div id="memberPanel" class="help" style="font-size:13.5px;">
+              Henüz kayıt yok. Formu doldurup kaydol.
+            </div>
+
+            <div class="panel" style="margin-top:14px; padding:14px; background: rgba(0,0,0,.14); border:1px solid rgba(255,255,255,.10); border-radius: 18px;">
+              <b>Güvenlik Notu</b>
+              <p class="help" style="margin-top:6px;">
+                Bu sayfa arka uç kullanmaz. Gerçek uygulama için sunucu tarafı doğrulama eklenmelidir.
+              </p>
+            </div>
+
+            <button id="clearBtn" class="btn" style="width:100%; margin-top:14px; background: rgba(255,255,255,.03);">
+              Kaydı Sil (localStorage)
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; align-items:center;">
+        <span>© <span id="year"></span> SporSalonu • Modern animasyonlu demo</span>
+        <span>İpucu: Tarayıcıdan açıp kaydı deneyebilirsin.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Reveal on scroll
+    const revealEls = Array.from(document.querySelectorAll('.reveal'));
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries){
+        if(e.isIntersecting) e.target.classList.add('in');
+      }
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => io.observe(el));
+
+    // Vücut tipi önerileri
+    const bodyType = document.getElementById('bodyType');
+    const goal = document.getElementById('goal');
+    const rec = document.getElementById('recommendation');
+
+    function labelForBody(v){
+      if(v === 'ecto') return 'Ectomorph';
+      if(v === 'meso') return 'Mesomorph';
+      if(v === 'endo') return 'Endomorph';
+      return '';
+    }
+
+    function recommend(v, g){
+      if(!v || !g){
+        return 'Vücut tipinizi ve hedefinizi seçtiğinizde burada kişiye özel öneriler görünecek.';
+      }
+
+      const base = {
+        ecto: {
+          train: 'Daha düşük hacim, daha yüksek kalite: temel hareketlerde (squat/bench/row) 3-5 set odak. Hızlı toparlanma için finisher’ı kontrollü tut.',
+          food: 'Kalori açığını kapat: öğünleri sıklaştır (3-4 ana + 1 ara). Protein + kompleks karbonhidratı artır.'
+        },
+        meso: {
+          train: 'Progressive overload ile ilerle: set sayısını küçük artır (hafta hafta). Isınmayı kısa tut, ama tekniği koru.',
+          food: 'Hedef kaloriyi tuttur: dengeli protein ve orta karbonhidrat. Yağ oranını aşırı yükseltme.'
+        },
+        endo: {
+          train: 'Hareket seçimi ve kondisyon birlikte: büyük bileşik hareket + kontrollü tempo. Core/mobiliteyi antrenmana göm.',
+          food: 'Doyurucu beslen: yüksek lif + yeterli protein. Karbonhidratı antrenman çevresinde kullan, porsiyonu ölç.'
+        }
+      };
+
+      const goalAdd = {
+        bulk: 'Kilo almak için haftalık +%0.25–%0.5 kalori fazlası mantığıyla ilerle.',
+        cut: 'Yağ azaltmak için hafif kalori açığı + yüksek protein hedefle.',
+        tone: 'Sıkılaşma için antrenman yoğunluğunu koruyup toparlanmayı optimize et (uyku + adım sayısı).'
+      };
+
+      const m = base[v];
+      const title = `${labelForBody(v)} • ${g === 'bulk' ? 'Kas artırmak' : g === 'cut' ? 'Yağ azaltmak' : 'Sıkılaşma'}`;
+
+      return `
+        <b>${title}</b><br/><br/>
+        <b>Antrenman</b>: ${m.train}<br/>
+        <b>Beslenme</b>: ${m.food}<br/>
+        <b>Hedef Notu</b>: ${goalAdd[g]}
+      `;
+    }
+
+    function updateRec(){
+      rec.innerHTML = recommend(bodyType.value, goal.value);
+    }
+    bodyType.addEventListener('change', updateRec);
+    goal.addEventListener('change', updateRec);
+
+    // Signup demo
+    const signupForm = document.getElementById('signupForm');
+    const status = document.getElementById('signupStatus');
+    const memberPanel = document.getElementById('memberPanel');
+    const clearBtn = document.getElementById('clearBtn');
+
+    // Diet UI
+    const dietStatus = document.getElementById('dietStatus');
+    const dietMeals = document.getElementById('dietMeals');
+    const dietMacros = document.getElementById('dietMacros');
+    const macroApprox = document.getElementById('macroApprox');
+    const macroMeals = document.getElementById('macroMeals');
+    const macroPortion = document.getElementById('macroPortion');
+    const macroGoalNote = document.getElementById('macroGoalNote');
+
+    function setErr(fieldName, msg){
+      const el = document.querySelector('[data-err-for="'+fieldName+'"]');
+      if(!el) return;
+      el.textContent = msg || '';
+    }
+    function clearErrs(){
+      ['name','email','phone','age','bodyType2','goal2','consent'].forEach(f => setErr(f, ''));
+    }
+
+    function isValidEmail(email){
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    function getStored(){
+      try{
+        return JSON.parse(localStorage.getItem('spor_salonu_member') || 'null');
+      }catch{ return null; }
+    }
+
+    function renderMember(){
+      const m = getStored();
+      if(!m){
+        memberPanel.innerHTML = 'Henüz kayıt yok. Formu doldurup kaydol.';
+        return;
+      }
+      const bt = m.bodyType === 'ecto' ? 'Ectomorph' : m.bodyType === 'meso' ? 'Mesomorph' : 'Endomorph';
+      const goalTxt = m.goal === 'bulk' ? 'Kas artırmak' : m.goal === 'cut' ? 'Yağ azaltmak' : 'Sıkılaşma';
+      memberPanel.innerHTML = `
+        <b>Hoş geldin, ${m.name} 👋</b><br/>
+        <div class="help" style="margin-top:8px;">
+          <div>Vücut Tipi: <b>${bt}</b></div>
+          <div>Hedef: <b>${goalTxt}</b></div>
+          <div>E-posta: <b>${m.email}</b></div>
+          <div>Telefon: <b>${m.phone}</b></div>
+          <div>Yaş: <b>${m.age}</b></div>
+        </div>
+        <div class="help" style="margin-top:10px;">Diyet Programı bölümüne geçip öğünleri görebilirsin.</div>
+      `;
+    }
+
+    function slotText(slot){
+      if(slot === 'k') return 'Kahvaltı';
+      if(slot === 'o') return 'Öğle';
+      if(slot === 'a') return 'Akşam';
+      if(slot === 'ara') return 'Ara Öğün';
+      return '';
+    }
+
+    function fillMeal(dayKey, slot, html){
+      const el = document.querySelector('[data-meal-day="'+dayKey+'"][data-meal-slot="'+slot+'"]');
+      if(el) el.innerHTML = html;
+    }
+
+    function buildDiet(body, g){
+      // Basit, kart doldurma odaklı örnekler
+      const proteinSet = body === 'ecto'
+        ? ['yumurta', 'tavuk', 'yoğurt', 'balık', 'baklagil']
+        : body === 'meso'
+          ? ['tavuk', 'hindi', 'yoğurt', 'ton balığı', 'baklagil']
+          : ['yumurta', 'yoğurt', 'hindi', 'balık', 'baklagil'];
+
+      const carbSet = g === 'bulk'
+        ? ['yulaf', 'pirinç', 'patates', 'makarna', 'tam tahıl ekmek']
+        : g === 'cut'
+          ? ['yulaf', 'bulgur', 'tatlı patates', 'sebze+pilav', 'tam tahıl ekmek']
+          : ['yulaf', 'bulgur', 'pirinç (ölçülü)', 'patates (ölçülü)', 'tam tahıl ekmek'];
+
+      const vegSet = ['salata', 'brokoli', 'ıspanak', 'domates-biber', 'kabak'];
+      const fatSet = ['zeytinyağı', 'avokado', 'kuruyemiş (az)', 'chia/keten'];
+
+      const dayOrder = [
+        {key:'Pzt', name:'Pazartesi', mult: 1.0},
+        {key:'Sal', name:'Salı', mult: 0.9},
+        {key:'Crs', name:'Çarşamba', mult: 1.0},
+        {key:'Prs', name:'Perşembe', mult: 0.85},
+        {key:'Cum', name:'Cuma', mult: 1.05},
+        {key:'Cts', name:'Cumartesi', mult: 1.1},
+        {key:'Paz', name:'Pazar', mult: 0.75}
+      ];
+
+      const mealByDay = {};
+      for(const d of dayOrder){
+        const p1 = proteinSet[(d.mult*10) % proteinSet.length | 0];
+        const p2 = proteinSet[((d.mult*20)|0) % proteinSet.length];
+        const c1 = carbSet[((d.mult*100)|0) % carbSet.length];
+        const c2 = carbSet[(((d.mult*100)+2)|0) % carbSet.length];
+        const v1 = vegSet[((d.mult*10)|0) % vegSet.length];
+        const v2 = vegSet[(((d.mult*10)+1)|0) % vegSet.length];
+        const f1 = fatSet[(((d.mult*10)+2)|0) % fatSet.length];
+
+        const carbNote = (g === 'bulk') ? '• porsiyon rahat' : (g === 'cut' ? '• porsiyon kontrollü' : '• antrenman çevresi vurgulu');
+        const carbAmt = g === 'bulk' ? 'bol' : (g === 'cut' ? 'orta' : 'orta/ölçülü');
+        const multTxt = d.mult >= 1.05 ? 'yüksek gün' : d.mult <= 0.8 ? 'daha düşük gün' : 'normal gün';
+
+        mealByDay[d.key] = {
+          k: `${p1} + ${c1} (${carbAmt})<br/>${f1} • ${multTxt}`,
+          o: `${p2} + ${c2} (${carbAmt})<br/>${v1} • ${carbNote}`,
+          a: `${p2} + (daha çok sebze) ${v2}<br/>${g === 'bulk' ? c2 : 'karbonhidrat daha düşük'} • ${g === 'cut' ? 'lif odak' : 'toparlanma odak'}`,
+          ara: g === 'bulk'
+            ? `${proteinSet[3]} + meyve (1 porsiyon)`
+            : g === 'cut'
+              ? `Yoğurt/kefir + kuruyemiş (az)`
+              : `Yoğurt/kefir + meyve (az)\n${fatSet[2] ? '' : ''}`
+        };
+      }
+
+      const macro = {};
+      const proteinRange = body === 'endo' ? 'yüksek (yaklaşık 1.8–2.3 g/kg)' : body === 'ecto' ? 'orta-yüksek (yaklaşık 1.6–2.1 g/kg)' : 'yüksek-orta (yaklaşık 1.7–2.2 g/kg)';
+
+      if(g === 'bulk'){
+        macro.approx = `Kalori: +%0.25–%0.5 fazlalık • Protein: ${proteinRange} • Karb: antrenman çevresinde daha yüksek`;
+        macro.meals = 'Günlük 3 ana + 1 ara: ara öğün kaloriyi artırmak için kullanılabilir.';
+        macro.portion = 'Örnek: Kahvaltıda 1 porsiyon yulaf • Öğle/Akşamda 1-1.5 kepçe pilav/makarna (hedefe göre) • Sebze her öğünde.';
+        macro.goalNote = `Ectomorph/endo farkı: ${body === 'ecto' ? 'daha sık öğün + enerji yoğun seçim' : 'protein/yağ oranını dengede tutarak ilerle'}`;
+      } else if(g === 'cut'){
+        macro.approx = `Kalori: hafif açık • Protein: ${proteinRange} • Karb: orta/ölçülü (özellikle akşam düşük) • Yağ: kontrollü`;
+        macro.meals = 'Günlük 3 ana + 1 ara: ara öğün tok tutmak için.';
+        macro.portion = 'Örnek: Kahvaltıda yulaf (orta) • Öğle/Akşamda sebze ağırlıklı tabak + ölçülü pirinç/patates • Ara öğünde yoğurt/kefir.';
+        macro.goalNote = `Kural: İki hafta sonunda kilo/ölçü gerilemezse porsiyonu kademeli ayarla.`;
+      } else {
+        macro.approx = `Kalori: bakım civarı (hafif açık ya da iyi ayarlı) • Protein: ${proteinRange} • Karb: antrenman çevresinde daha çok, gün içine yay.`;
+        macro.meals = 'Günlük 3 ana + 1 ara: performans günü (antrenman günleri) carb artırılır.';
+        macro.portion = 'Örnek: Antrenman öncesi/sonrası yulaf-pirinç/bulgur (ölçülü) • Akşam sebze ağırlıklı • Ara öğün hafif protein.';
+        macro.goalNote = `Sıkılaşma: uyku + adım sayısı diyet kadar etkilidir.`;
+      }
+
+      return { mealByDay, macro };
+    }
+
+    function renderDiet(){
+      const stored = getStored();
+
+      // Kayıt yoksa: diyet varsayılanını kapat
+      if(!stored || !stored.bodyType || !stored.goal){
+        dietMeals.style.display = 'none';
+        dietMacros.style.display = 'none';
+        dietStatus.style.display = 'block';
+        dietStatus.textContent = 'Kişiye özel diyet için önce kayıt yap.';
+        return;
+      }
+
+
+      const bt = stored.bodyType;
+      const g = stored.goal;
+
+      dietStatus.style.display = 'none';
+      dietMeals.style.display = 'block';
+      dietMacros.style.display = 'block';
+
+      const built = buildDiet(bt, g);
+
+      for(const dayKey of Object.keys(built.mealByDay)){
+        const obj = built.mealByDay[dayKey];
+        fillMeal(dayKey, 'k', obj.k);
+        fillMeal(dayKey, 'o', obj.o);
+        fillMeal(dayKey, 'a', obj.a);
+        fillMeal(dayKey, 'ara', obj.ara);
+      }
+
+      macroApprox.innerHTML = built.macro.approx;
+      macroMeals.innerHTML = built.macro.meals;
+      macroPortion.innerHTML = built.macro.portion;
+      macroGoalNote.innerHTML = built.macro.goalNote;
+    }
+
+    signupForm.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      clearErrs();
+      status.style.display = 'none';
+
+      const data = {
+        name: document.getElementById('name').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        phone: document.getElementById('phone').value.trim(),
+        age: document.getElementById('age').value.trim(),
+        bodyType2: document.getElementById('bodyType2').value,
+        goal2: document.getElementById('goal2').value,
+        consent: document.getElementById('consent').value
+      };
+
+      let ok = true;
+
+      if(data.name.length < 3){ setErr('name','Ad soyad en az 3 karakter olmalı.'); ok=false; }
+      if(!isValidEmail(data.email)){ setErr('email','Geçerli bir e-posta gir.'); ok=false; }
+      if(data.phone.length < 8){ setErr('phone','Telefonu doğru formatta gir.'); ok=false; }
+      const ageNum = Number(data.age);
+      if(!Number.isFinite(ageNum) || ageNum < 14 || ageNum > 90){ setErr('age','Yaş 14-90 arası olmalı.'); ok=false; }
+      if(!data.bodyType2){ setErr('bodyType2','Vücut tipi seçmelisin.'); ok=false; }
+      if(!data.goal2){ setErr('goal2','Hedef seçmelisin.'); ok=false; }
+      if(!data.consent){ setErr('consent','Onayı seçmelisin.'); ok=false; }
+
+      if(!ok) return;
+
+      localStorage.setItem('spor_salonu_member', JSON.stringify({
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        age: ageNum,
+        bodyType: data.bodyType2,
+        goal: data.goal2,
+        createdAt: Date.now()
+      }));
+
+      status.style.display = 'block';
+      renderMember();
+
+      // Senkron: vücut tipi seçim panelini de güncelle
+      bodyType.value = data.bodyType2;
+      goal.value = data.goal2;
+      updateRec();
+
+      renderDiet();
+
+      status.animate([{ transform:'translateY(8px)', opacity:.0 }, { transform:'translateY(0)', opacity:1 }], { duration: 280, easing:'ease-out' });
+    });
+
+    clearBtn.addEventListener('click', ()=>{
+      localStorage.removeItem('spor_salonu_member');
+      renderMember();
+      status.style.display = 'none';
+      renderDiet();
+    });
+
+    renderMember();
+    updateRec();
+    renderDiet();
+  </script>
+</body>
+</html>
+
